@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 def index(request):
   if not request.user.is_authenticated:
     return HttpResponseRedirect(reverse("login"))
+  return render(request, "users/user.html")
   
   
 def login_view(request):
@@ -26,4 +27,7 @@ def login_view(request):
 
 
 def logout_view(request):
-  pass
+  logout(request)
+  return render(request, "users/login.html", {
+    "message": "Logged out."
+  })
